@@ -47,21 +47,16 @@ export class NoteService {
   }
 
   async update(id: string, dto: UpdateNoteDto, userId: string) {
-    const note = await this.prisma.note.findFirst({
-      where: {
-        id,
-        userId,
-      },
+    const note = await this.prisma.note.update({
+      where: { id, userId },
+      data: dto,
     });
 
     if (!note) {
-      throw new ForbiddenException('You do not own this note');
+      throw new ForbiddenException('unable to update');
     }
 
-    return this.prisma.note.update({
-      where: { id },
-      data: dto,
-    });
+    return note;
   }
 
   async remove(id: string, userId: string): Promise<INote | null> {
