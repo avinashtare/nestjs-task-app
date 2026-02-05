@@ -1,0 +1,20 @@
+meta {
+  name: create notes
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{BASEURL}}/api/v1/note
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {"title": "first note 1", "content": "testing the app"}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

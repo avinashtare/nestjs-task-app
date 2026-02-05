@@ -1,0 +1,16 @@
+meta {
+  name: delete notes
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{BASEURL}}/api/v1/note/6984d2347a102c19014a7280
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,20 @@
+meta {
+  name: update
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{BASEURL}}/api/v1/note/6984d5948ad478d6ef86a677
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {"title": "this title will be updated"}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,16 @@
+meta {
+  name: all notes
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{BASEURL}}/api/v1/note
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
