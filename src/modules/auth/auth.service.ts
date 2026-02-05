@@ -15,7 +15,7 @@ export class AuthService {
     private readonly userSerice: UserService,
     private jwtService: JwtService,
   ) {}
-  async register(data: RegisterDto) {
+  async register(data: RegisterDto): Promise<{ accessToken: string }> {
     const isUserExists = await this.userSerice.getUserByEmail(data.email);
 
     // check user already exits
@@ -46,7 +46,7 @@ export class AuthService {
 
     return { accessToken };
   }
-  async login(data: LoginDto) {
+  async login(data: LoginDto): Promise<{ accessToken: string }> {
     const user = await this.userSerice.getUserByEmail(data.email);
 
     // if user not exists

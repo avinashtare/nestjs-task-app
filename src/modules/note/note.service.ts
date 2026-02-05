@@ -36,7 +36,7 @@ export class NoteService {
     return allNote;
   }
 
-  async findOne(id: string, userId: string): Promise<INote | null> {
+  async findOne(id: string, userId: string): Promise<INote> {
     const note = await this.prisma.note.findFirst({
       where: { id, userId },
     });
@@ -46,23 +46,26 @@ export class NoteService {
     return note;
   }
 
-  async update(id: string, dto: UpdateNoteDto, userId: string) {
-    const note = await this.prisma.note.update({
-      where: { id, userId },
-      data: dto,
-    });
-
-    if (!note) {
+  async update(id: string, dto: UpdateNoteDto, userId: string): Promise<INote> {
+    try {
+      const note = await this.prisma.note.update({
+        where: { id, userId },
+        data: dto,
+      });
+      return note;
+    } catch {
       throw new ForbiddenException('unable to update');
     }
-
-    return note;
   }
 
   async remove(id: string, userId: string): Promise<INote | null> {
-    const note = await this.prisma.note.delete({
-      where: { id, userId },
-    });
-    return note;
+    try {
+      const note = await this.prisma.note.delete({
+        where: { id, userId },
+      });
+      return note;
+    } catch {
+      throw new ForbiddenException('unable to remove');
+    }
   }
 }
